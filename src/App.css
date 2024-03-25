@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap');
+body {
+  font-family: "Alegreya", serif;
+
+}
+.student-grid{
+  display: grid;
+  grid-template-columns: 15% 15% 33% 33%;
+  grid-gap: 10px;
+  text-align: center;
+}
+.header {
+  background-color: rgb(187,153,255);
+  color: rgb(255, 255, 255);
+  padding: 1em;
+  font-weight: 600;
+}
+.student-name{
+  background-color: rgb(222,205,255);
+  padding: 1.5em;
+}
+.detail {
+  padding: 1.5em;
+  background-color: rgb(236,227,255);
+}
+.underline{
+  text-decoration: underline;
+  cursor: pointer;
+}
+input[type='file']{
+  display: none;
+}
+.recordings{
+  padding: 1em;
+  width: 90%;
+  margin: 0 auto;
+}
+.navbar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3em;
+}
+.gap {
+  gap: 1em
+}
+.navbar .page-header{
+  font-weight: 700;
+  font-size: 1.8em;
+}
+.navbar span{
+  font-size: 1.4em;
+}
+.flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+a {
+  text-decoration: none;
+  color: black;
+
+}
+.flex-gap{
+  gap: 4em
+}
+.navbar span{
+  cursor: pointer;
+}
+.hidden{
+  display: none;
+}
+.student-report-grid{
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+  grid-gap: 10px;
+  text-align: center;
+}
+.filter-input{
+  background-color: rgb(222,205,255);
+  width: max-content;
+  border: none;
+  border-radius: 5px;
+  padding: 0.6em;
+}
+.label{
+  background-color: rgb(222,205,255);
+  padding: 0.5em;
+  border-radius: 10px;
+}
+table{
+  width: 100%;
+  text-align: center;
+}
+table,th,td{
+  border: 2px solid black;
+  border-collapse: collapse;
+  padding: 1em;
+
+}
+.filter-wrapper{
+  gap: 2em;
+  padding-bottom: 2em;
+}
+
+input[type='date']{
+  border: none;
+  outline: none;
+}
+::-webkit-datetime-edit { display: none; }
+::-webkit-datetime-edit-fields-wrapper { display: none; }
+::-webkit-inner-spin-button { display: none; }
+::-webkit-calendar-picker-indicator { 
+  font-size: 30px;
+ }
+.report-detail{
+  justify-content: space-between;
+}
+.report-detail div{
+  gap: 1em
+}
