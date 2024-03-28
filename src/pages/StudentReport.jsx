@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react"
 import {  MdOutlinePauseCircleOutline, MdOutlinePlayCircle } from "react-icons/md";
 import { useParams } from "react-router-dom"
 import Navbar from "../Navbar";
-import { formatDate } from "../utils";
+import { convertMillisecondToSecond, formatDate } from "../utils";
 
 const StudentReport = () => {
     const {reportId} = useParams();
@@ -13,7 +13,7 @@ const StudentReport = () => {
     const originalText = 'A dam is a wall built across a river. When it rains, a lot of water goes down the river and into the sea. The dam stops the water. The water then becomes a big lake behind the dam. Later this water is let out into the fields. There it helps crops like rice to grow.';
 
     useEffect(()=>{
-        axios.get(`http://localhost:3000/student/${reportId}`).then((res)=>{
+        axios.get(`https://iitb-task-backend.onrender.com/student/${reportId}`).then((res)=>{
             console.log(res.data)
             setReportDetails(res.data.studentReport)
         }).catch((err)=> {
@@ -22,11 +22,14 @@ const StudentReport = () => {
     },[])
 
     function handleTogglePlay(audioUrl){
-        var audio = audioRef.current
+        let audio = audioRef.current
         if(audio.src !== audioUrl){
             audio.src= audioUrl
             audio.play()
             setIsPlaying(true)
+            audio.addEventListener('ended', ()=>{
+                setIsPlaying(false)
+            })
         }
         else{
             if(isPlaying){
@@ -36,6 +39,9 @@ const StudentReport = () => {
             else{
                 audio.play()
                 setIsPlaying(true)
+                audio.addEventListener('ended', ()=>{
+                    setIsPlaying(false)
+                })
             }
         }
     }
@@ -54,7 +60,7 @@ const StudentReport = () => {
 
 
         isModified = modifyWords(insWords,index,'underline',"black",word,result,'insertion') || isModified
-        isModified = modifyWords(delWords,index,'line-through',"null",word,result, 'deletion') || isModified
+        isModified = modifyWords(delWords,index,'line-through','black',word,result, 'deletion') || isModified
         isModified = modifyWords(subsWords,index, null,'yellow', word,result,'substitution') || isModified
 
          if(!isModified){
@@ -80,7 +86,7 @@ const StudentReport = () => {
             if(modification[i].index === index){
                 const [refText, modifiedText] = modification[i].words.split(':')
                 result.push(<>
-                    <span key={`${index}-${modificationType}`} style={{textDecoration: textDecoration,color: color}}>{modifiedText}</span>
+                    <span key={`${index}-${modificationType}`} style={{textDecoration: textDecoration,color: color}}>{modificationType==='deletion' ? refText :modifiedText}</span>
                     {' '}
                     <span key={`${index}-${modificationType}-originalWord`} style={{color:modificationType =='insertion' ? 'green' : modificationType==='substitution' ? 'yellow': ''}}>
                     {modificationType === 'substitution' && `(${refText})`}
@@ -97,7 +103,7 @@ const StudentReport = () => {
     
 
   return (
-    <div className="recordings">
+    <div className="container">
         <Navbar/>
         <div className="flex report-detail">
         <div className="flex">
@@ -111,6 +117,10 @@ const StudentReport = () => {
         <div className="flex">
         <span className="label">Report Time:</span>
         <span>{formatDate(report?.report?.createdAt)}</span>
+        </div>
+        <div className="flex">
+        <span className="label">API Response Time:</span>
+        <span>{convertMillisecondToSecond(report?.report?.responseTime)}s</span>
         </div>
         </div>
 

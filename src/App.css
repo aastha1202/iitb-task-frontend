@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap');
 body {
-  font-family: "Alegreya", serif;
-
+  /* font-family: "Alegreya", serif; */
+  margin:0
 }
 .student-grid{
   display: grid;
@@ -30,13 +30,14 @@ body {
 input[type='file']{
   display: none;
 }
-.recordings{
+.container{
   padding: 1em;
   width: 90%;
   margin: 0 auto;
 }
 .navbar{
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 3em;
@@ -47,6 +48,17 @@ input[type='file']{
 .navbar .page-header{
   font-weight: 700;
   font-size: 1.8em;
+  font-family: "Alegreya", serif;
+}
+.navbar-header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em
+}
+.navbar-container{
+  justify-content: space-between;
+  width: 100%;
 }
 .navbar span{
   font-size: 1.4em;
@@ -61,8 +73,11 @@ a {
   color: black;
 
 }
-.flex-gap{
-  gap: 4em
+.nav-links{
+  gap: 4em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .navbar span{
   cursor: pointer;
@@ -119,3 +134,24 @@ input[type='date']{
 .report-detail div{
   gap: 1em
 }
+.form-container{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+  justify-content: center;
+  gap: 1em;
+  padding: 2em;
+  background-color: rgb(187,153,255);
+  border-radius: 10px;
+}
+.form-container input,button{
+  width: max-content;
+  align-self: center;
+  background-color: rgb(236,227,255);
+  border: none;
+  outline: none;
+  padding: 1em;
+  border-radius: 10px;
+}
+

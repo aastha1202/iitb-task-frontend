@@ -9,9 +9,10 @@ import toast, { Toaster } from 'react-hot-toast';
 const Recording = () => {
     const [students, setStudentDetails] = useState([])
     const [refetchData, setRefetchData] = useState(false)
+
     useEffect(()=> {
         async function getStudentDetails(){
-            await axios.get('http://localhost:3000/student/').then((res)=>
+            await axios.get('https://iitb-task-backend.onrender.com/student/').then((res)=>
             {
                 console.log(res.data)
                 setStudentDetails(res.data.students)
@@ -30,13 +31,13 @@ const Recording = () => {
             const base64audio= event.target.result
             console.log(base64audio)
             toast.loading('Uploading',{id:1})
-            axios.post('http://localhost:3000/recording/add',{
+            axios.post('https://iitb-task-backend.onrender.com/recording/add',{
                 audio: base64audio,
                 id: studentId
             }).then((res)=>{
+                setRefetchData(prev => !prev)
                 toast.success('Successfully uploaded audio',{id:1})
                 console.log(res.data)
-                setRefetchData(true)
             }).catch((err)=> {
                 toast.error('Error',{id:1})
                 console.log('Error uploading audio: ',err)
@@ -47,12 +48,12 @@ const Recording = () => {
 
     function handleGenerateReport(recordingId){
         toast.loading('Generating report',{id:2})
-        axios.post('http://localhost:3000/report/generate',{
+        axios.post('https://iitb-task-backend.onrender.com/report/generate',{
            recordingId: recordingId 
         }).then((res)=> {
+            setRefetchData(prev => !prev)
             toast.success('Successfully generated report',{id:2})
             console.log(res.data)
-            setRefetchData(true)
         }).catch((err)=>{
             toast.error('Error',{id:2})
             console.log('Error generating report: ',err)
@@ -62,7 +63,7 @@ const Recording = () => {
     
 
   return (
-    <div className="recordings">
+    <div className="container">
         <Navbar/>
         
         <div style={{display:'grid', gap: '10px'}}>

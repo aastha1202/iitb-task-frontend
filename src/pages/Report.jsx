@@ -18,7 +18,7 @@ const Report = () => {
     useEffect(()=> {
         console.log(students)
         async function getStudentDetails(){
-            await axios.get('http://localhost:3000/student/report').then((res)=>
+            await axios.get('https://iitb-task-backend.onrender.com/student/report').then((res)=>
             {
                 console.log(res.data)
                 setStudentDetails(res.data.studentReport)
@@ -31,8 +31,6 @@ const Report = () => {
     },[])
 
     function handleChange(e){
-        // console.log(e.target.value)
-        // console.log(fromDate,toDate)
         const filterName = e?.target?.value
         let query= ''
         if(filterName){
@@ -46,7 +44,7 @@ const Report = () => {
         else if(fromDate && toDate){
             query=`fromDate=${fromDate}&toDate=${toDate}`
         }
-        axios.get(`http://localhost:3000/student/query?${query}`).then((res)=>{
+        axios.get(`https://iitb-task-backend.onrender.com/student/query?${query}`).then((res)=>{
             console.log(res.data)
             setStudentDetails(res.data.students)
         }).catch((err)=>
@@ -58,7 +56,7 @@ const Report = () => {
 
 
   return (
-    <div className="recordings">
+    <div className="container">
     <Navbar/>
    
     <div className="flex filter-wrapper">

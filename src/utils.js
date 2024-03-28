@@ -9,6 +9,9 @@ export function handleTogglePlay(audioUrl, currentAudio,setCurrentAudio,audioRef
         audio.src= audioUrl
         audio.play()
         setIsPlaying(true)
+        audio.addEventListener('ended', ()=>{
+            setIsPlaying(false)
+        })
     }
     else{
         if(isPlaying){
@@ -18,6 +21,9 @@ export function handleTogglePlay(audioUrl, currentAudio,setCurrentAudio,audioRef
         else{
             audio.play()
             setIsPlaying(true)
+            audio.addEventListener('ended', ()=>{
+                setIsPlaying(false)
+            })
         }
     }
 }
@@ -29,6 +35,6 @@ export function formatDate(date){
 }
 
 export function convertMillisecondToSecond(time){
-    const ms = time/100
+    const ms = time/1000
     return ms
 }
