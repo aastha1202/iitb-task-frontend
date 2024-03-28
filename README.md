@@ -1,8 +1,13 @@
-# React + Vite
+This is the frontend application which uses Speech Assessment Service (SAS) Cloud API to generate student report
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+#### Tech Stack
+- React.js
+- React Router
+- Axios
+- React Icons
+- React hot toast
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#### Features
+View and manage student records
+Upload recordings for students
+Generate reports based on recordings
