@@ -5,6 +5,7 @@ import {  MdOutlinePlayCircle } from 'react-icons/md'
 import { MdOutlinePauseCircleOutline } from "react-icons/md";
 import Navbar from "../Navbar";
 import { convertMillisecondToSecond, formatDate, handleTogglePlay } from "../utils";
+import toast, { Toaster } from "react-hot-toast";
 
 
 const Report = () => {
@@ -15,11 +16,15 @@ const Report = () => {
     const [fromDate, setFromDate] = useState()
     const [toDate, setToDate] = useState()
     const audioRef = useRef(new Audio(currentAudio))
+    const [loading, setLoading] = useState(true)
+
     useEffect(()=> {
         console.log(students)
         async function getStudentDetails(){
             await axios.get('https://iitb-task-backend.onrender.com/student/report').then((res)=>
             {
+                setLoading(false)
+                toast.success('successfully loaded data',{id:3})
                 console.log(res.data)
                 setStudentDetails(res.data.studentReport)
             }).catch((err)=>
@@ -29,6 +34,14 @@ const Report = () => {
 
         getStudentDetails()
     },[])
+
+    function handleLoading(){
+        toast.loading('loading student data',{id:3})
+    }
+
+    if(loading){
+        handleLoading()
+    }
 
     function handleChange(e){
         const filterName = e?.target?.value
@@ -111,6 +124,7 @@ const Report = () => {
           </div>
           ))}
         </div>
+        <Toaster/>
         </div>
   )
 }

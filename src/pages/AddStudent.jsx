@@ -15,10 +15,10 @@ function handleSubmit(e){
     }).then((res)=> {
         setName('')
         setRollno('')
-        toast.success('Successfully added student',{id:2})
+        toast.success('Successfully added student',{id:5})
         console.log(res.data)
     }).catch((err)=>{
-        toast.error('Error',{id:2})
+        toast.error('Error',{id:5})
         console.log('Error while adding a student: ',err)
     })
 }

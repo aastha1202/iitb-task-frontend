@@ -9,11 +9,15 @@ import toast, { Toaster } from 'react-hot-toast';
 const Recording = () => {
     const [students, setStudentDetails] = useState([])
     const [refetchData, setRefetchData] = useState(false)
+    const [loading, setLoading] = useState(true)
+
 
     useEffect(()=> {
         async function getStudentDetails(){
             await axios.get('https://iitb-task-backend.onrender.com/student/').then((res)=>
             {
+                setLoading(false)
+                toast.success('successfully loaded data',{id:4})
                 console.log(res.data)
                 setStudentDetails(res.data.students)
             }).catch((err)=>
@@ -60,6 +64,14 @@ const Recording = () => {
         })
     }
 
+    function handleLoading(){
+        toast.loading('loading student data',{id:4})
+    }
+
+    if(loading){
+        handleLoading()
+    }
+
     
 
   return (
@@ -75,7 +87,8 @@ const Recording = () => {
 
           </div>
 
-          {students?.map((student)=>(
+
+          {!loading && students?.map((student)=>(
           <div key={student._id} className="student-grid">
           <div className="student-name">{student.name} </div>
           <div className="detail">Dams</div>
